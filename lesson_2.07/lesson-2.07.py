@@ -84,4 +84,60 @@ ax.xaxis.set_minor_locator(mpl.dates.MonthLocator(bymonthday=15))       # тик
 
 plt.close()
 
+# Позиционирование не по координатам
+fig = plt.figure()
+ax1 = plt.axes()
+ax2 = plt.axes([0.4,0.3,0.1,0.2])
+
+ax1.set_xlim(0,2)
+ax1.text(0.6, 0.8, "Data1 (0.6, 0.8)", transform=ax1.transData)      # transData - относительно каких координат происходит позиционирование
+ax1.text(0.6, 0.8, "Data2 (0.6, 0.8)", transform=ax2.transData)
+
+ax1.text(0.5, 0.1, "Data3 (0.5, 0.1)", transform=ax1.transAxes)     # transAxes - относительно каких осей происходит позиционирование
+ax1.text(0.5, 0.1, "Data4 (0.5, 0.1)", transform=ax2.transAxes)
+
+ax1.text(0.5, 0.1, "Data5 (0.2, 0.1)", transform=fig.transFigure)     # transAxes - относительно каких фигур происходит позиционирование
+ax1.text(0.5, 0.1, "Data6 (0.2, 0.1)", transform=fig.transFigure)
+
+plt.close()
+
+# Аннотирование стрелочками
+fig, ax = plt.subplots()
+
+x = np.linspace(0, 20, 1000)
+ax.plot(x, np.cos(x))
+ax.axis("equal")
+
+ax.annotate("Локальный максимум", xy=(6.28, 1), xytext=(10,4), arrowprops=dict(facecolor="red"))
+
+ax.annotate("Локальный минимум", xy=(3.14, -1), xytext=(2,-6), arrowprops=dict(facecolor="blue", arrowstyle="->", edgecolor="blue"))
+
+plt.close()
+
+# количество делений на графике
+
+fig, ax = plt.subplots(4, 4, sharex=True, sharey=True)
+
+for axi in ax.flat:
+    axi.xaxis.set_major_locator(plt.MaxNLocator(5))
+    axi.yaxis.set_major_locator(plt.MaxNLocator(3))
+
+plt.close()
+
+x = np.random.randn(1000)
+
+fig = plt.figure(facecolor="gray")
+ax = plt.axes(facecolor="green")
+
+plt.grid(color="w", linestyle="solid")
+
+ax.xaxis.tick_bottom()
+ax.yaxis.tick_left()
+
+# .matplotlibrc - файл для единой настройки графиков
+
+# plt.style.use("default")
+
+plt.hist(x)
+
 plt.show()
