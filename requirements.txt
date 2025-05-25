@@ -1,5 +1,7 @@
+bs4==0.0.2
 numpy==2.2.3
 pandas==2.2.3
+lxml==5.4.0
 matplotlib==3.10.1
 ipython==9.0.1
 seaborn==0.13.2
